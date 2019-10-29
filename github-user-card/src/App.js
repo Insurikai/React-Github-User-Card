@@ -7,14 +7,20 @@ export default class App extends React.Component {
   constructor(){
     super();
     this.state = {
-      user: {}
+      user: {},
+      followers: []
     }
     this.componentDidMount = this.componentDidMount.bind(this);
   }
   componentDidMount(){
     axios.get('https://api.github.com/users/Insurikai').then((results)=>{
       this.setState({
-        user:results.data
+        user: results.data
+      });
+    }).catch(console.log);
+    axios.get('https://api.github.com/users/Insurikai/followers').then((results)=>{
+      this.setState({
+        followers: results.data
       });
     }).catch(console.log);
   }
@@ -24,7 +30,7 @@ export default class App extends React.Component {
     return (
       <div className="App">
         <h1> done</h1>
-        <UserCard userInfo={this.state.user}/>
+        <UserCard userInfo={this.state.user} followers={this.state.followers}/>
       </div>
     );
   }
