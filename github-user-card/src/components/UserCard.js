@@ -1,15 +1,14 @@
 import React from 'react';
 
-export default class UserCard extends React.Component{
-    render(){
-        if(this.props.userInfo){
-            return(
-                <>
-                <h1>{this.props.userInfo.login}</h1>
-                </>
-            )
-        }else{
-            return (null);
-        }
-    }
+export default (props) => {
+    return(
+        <div className="user-card">
+            <h1 className="name">{props.userInfo.login}</h1>
+            {
+                props.followers.map( (follower)=>{
+                    return(<p className="follower">{follower}</p>)
+                })
+            }
+        </div>
+    )
 }
